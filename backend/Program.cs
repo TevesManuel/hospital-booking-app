@@ -48,11 +48,7 @@ public class Startup
         Console.WriteLine(fullDirectory);
 
         // Servir archivos de la carpeta build de React
-        app.UseStaticFiles(new StaticFileOptions
-        {
-            FileProvider = new PhysicalFileProvider(fullDirectory),
-            RequestPath = ""
-        });
+        app.UseStaticFiles();
 
         app.UseRouting();
 
