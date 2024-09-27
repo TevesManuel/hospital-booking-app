@@ -1,0 +1,15 @@
+/home/manuel_teves/Documentos/hospital-booking-app/backend/obj/Debug/net8.0/backend.GeneratedMSBuildEditorConfig.editorconfig
+/home/manuel_teves/Documentos/hospital-booking-app/backend/obj/Debug/net8.0/backend.AssemblyInfoInputs.cache
+/home/manuel_teves/Documentos/hospital-booking-app/backend/obj/Debug/net8.0/backend.AssemblyInfo.cs
+/home/manuel_teves/Documentos/hospital-booking-app/backend/obj/Debug/net8.0/backend.csproj.CoreCompileInputs.cache
+/home/manuel_teves/Documentos/hospital-booking-app/backend/obj/Debug/net8.0/backend.sourcelink.json
+/home/manuel_teves/Documentos/hospital-booking-app/backend/bin/Debug/net8.0/backend
+/home/manuel_teves/Documentos/hospital-booking-app/backend/bin/Debug/net8.0/backend.deps.json
+/home/manuel_teves/Documentos/hospital-booking-app/backend/bin/Debug/net8.0/backend.runtimeconfig.json
+/home/manuel_teves/Documentos/hospital-booking-app/backend/bin/Debug/net8.0/backend.dll
+/home/manuel_teves/Documentos/hospital-booking-app/backend/bin/Debug/net8.0/backend.pdb
+/home/manuel_teves/Documentos/hospital-booking-app/backend/obj/Debug/net8.0/backend.dll
+/home/manuel_teves/Documentos/hospital-booking-app/backend/obj/Debug/net8.0/refint/backend.dll
+/home/manuel_teves/Documentos/hospital-booking-app/backend/obj/Debug/net8.0/backend.pdb
+/home/manuel_teves/Documentos/hospital-booking-app/backend/obj/Debug/net8.0/backend.genruntimeconfig.cache
+/home/manuel_teves/Documentos/hospital-booking-app/backend/obj/Debug/net8.0/ref/backend.dll
