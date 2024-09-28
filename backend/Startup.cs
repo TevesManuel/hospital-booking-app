@@ -23,7 +23,6 @@ public class Startup
         }
 
         app.UseHttpsRedirection();
-
         // Servir archivos de la carpeta build de React
         app.UseStaticFiles();
 
