@@ -1,0 +1,21 @@
+.hospitalHomeInfoContainer
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2%;
+}
+.homeInfoContainer {
+    width: 70%;
+    height: 100%;
+    background-color: white;
+    position: relative;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    max-height: 300px;
+    overflow-y: scroll;
+}

@@ -1,12 +1,42 @@
 .homeMainDiv
 {
-    background-image: url("./home2.jpg");
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.homeBackground
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("./assets/home.jpg");
     background-size: cover;
     background-position: center;
+    filter: blur(18px);
+}
+.textContainerInfoContainer
+{
+    padding: 30px;
+    flex: 7;
     width: 100%;
-    height: 90%;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.imageTextInfoContainer
+{
+    flex: 3;
     display: flex;
     justify-content: center;
     align-items: center;
-    filter: blur(18px);
+}
+.answerTextInfoContainer
+{
+    padding-left: 30px;
+}
+.homeInfoImage
+{
+    width: 40%;
+    filter: drop-shadow(4px 4px 4px black);
 }

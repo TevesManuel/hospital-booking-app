@@ -6,7 +6,7 @@ const Header : React.FC = () => {
         <header>
           <div className="subHeaderDiv" ></div>
           <div className="subHeaderDiv" >
-            <h1 className="headerTitleText">TEVES HOSPITAL</h1>
+            <h1 className="headerTitleText">TEVES BOOKING</h1>
           </div>
           <div className="subHeaderDiv" >
             <button id="loginButtonHeader" className="btn btn-primary" >

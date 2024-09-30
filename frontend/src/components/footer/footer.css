@@ -11,6 +11,7 @@ footer
     z-index: 1000;
     display: flex;
     justify-content: space-between;
+    overflow: hidden;
 }
 
 .subFooterDiv

@@ -1,7 +1,7 @@
 import React from "react";
 import './footer.css';
-import phoneIcon from './phone-icon.png';
-import emailIcon from './email-icon.svg';
+import phoneIcon from './assets/phone-icon.png';
+import emailIcon from './assets/email-icon.svg';
 
 const Footer : React.FC = () => {
     return (
@@ -25,7 +25,9 @@ const Footer : React.FC = () => {
                 </div>
             </div>
             <div className="subFooterDiv">
-               <button>Contact & service</button>
+                <a href="email:manuel.tomas.teves@gmail.com">
+                    <button className="btn btn-secondary">Contact & service</button>
+                </a>
             </div>
         </footer>
     );
