@@ -4,10 +4,12 @@ import './header.css';
 const Header : React.FC = () => {
     return (
         <header>
-          <div></div>
-          <div></div>
-          <div>
-            <button id="loginButtonHeader">
+          <div className="subHeaderDiv" ></div>
+          <div className="subHeaderDiv" >
+            <h1 className="headerTitleText">TEVES HOSPITAL</h1>
+          </div>
+          <div className="subHeaderDiv" >
+            <button id="loginButtonHeader" className="btn btn-primary" >
               Login
             </button>
           </div>

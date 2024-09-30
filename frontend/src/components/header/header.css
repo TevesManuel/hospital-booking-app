@@ -2,9 +2,29 @@ header
 {
     width: 100%;
     position: relative;
+    height: 10dvh;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    z-index: 99;
 }
 #loginButtonHeader
 {
+    background-color: #008BF8;
+    border-color: #008BF8;
     position: absolute;
     right: 0;
+}
+.headerTitleText
+{
+    font-family: monospace;
+    color: black;
+}
+.subHeaderDiv
+{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
