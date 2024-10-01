@@ -1,6 +1,6 @@
 html {
   width: 100dvw;
-  height: 80dvh;
+  height: 94dvh;
 }
 
 body {
@@ -39,4 +39,14 @@ body {
 /* Cambio de color cuando el usuario interactúa */
 ::-webkit-scrollbar-thumb:hover {
   background-color: #555;
+}
+
+.centerText
+{
+  text-align: center;
+}
+
+.mfont
+{
+  font-family: monospace;
 }

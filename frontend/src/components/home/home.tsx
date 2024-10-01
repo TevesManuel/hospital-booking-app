@@ -3,13 +3,13 @@ import './home.css';
 import calendarImage from './assets/calendar.svg';
 import moneyImage from './assets/money.svg';
 import InfoModal from './infoModal/infoModal';
+import Background from "../background/background";
 
 const Home : React.FC = () => {
     return(
         <div className="homeMainDiv">
-            <div className="homeBackground"></div>
+            <Background />
             <div className="hospitalHomeInfoMainContainer">
-
                 <InfoModal>
                     <div className="textContainerInfoContainer">
                         <h1>
@@ -30,13 +30,13 @@ const Home : React.FC = () => {
                         </div>        
                     </div>
                     <div className="imageTextInfoContainer">
-                        <img src={calendarImage} className="homeInfoImage"/>
+                        <img src={calendarImage} className="homeInfoImage" alt="calendar ilustration"/>
                     </div>
                 </InfoModal>
 
                 <InfoModal isRightAlign={true}>
                     <div className="imageTextInfoContainer">
-                        <img src={moneyImage} className="homeInfoImage"/>
+                        <img src={moneyImage} className="homeInfoImage" alt="money ilustration"/>
                     </div>
                     <div className="textContainerInfoContainer">
                         <h1>

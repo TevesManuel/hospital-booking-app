@@ -15,11 +15,11 @@ const Footer : React.FC = () => {
             <div className="subFooterDiv">
                 <div>
                     <div>
-                        <img src={phoneIcon} id="phoneImgFooter"></img>
+                        <img src={phoneIcon} id="phoneImgFooter" alt="phone icon"></img>
                         <h5 className="footerImgText">(+54)2213058662</h5>
                     </div>
                     <div>
-                        <img src={emailIcon} id="emailIconFooter"></img>
+                        <img src={emailIcon} id="emailIconFooter" alt="email icon"></img>
                         <h5 className="footerImgText">manuel.tomas.teves@gmail.com</h5>
                     </div>
                 </div>
