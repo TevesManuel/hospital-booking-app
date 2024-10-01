@@ -1,10 +1,13 @@
 import React from "react";
 import './header.css';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Header : React.FC = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+
+    console.log(location.pathname);
 
     const redirectToLoginPage = () => {
       navigate('/login');
@@ -14,10 +17,12 @@ const Header : React.FC = () => {
         <header>
           <div className="subHeaderDiv" ></div>
           <div className="subHeaderDiv" >
-              <h1 className="headerTitleText">TEVES BOOKING</h1>
+                <a href="/" style={{textDecoration: 0}}>
+                    <h1 className="headerTitleText">TEVES BOOKING</h1>
+                </a>
           </div>
           <div className="subHeaderDiv" >
-              <button id="loginButtonHeader" className="btn btn-primary" onClick={redirectToLoginPage} >
+              <button id="loginButtonHeader" className="btn btn-primary" onClick={redirectToLoginPage} disabled={location.pathname === '/login' ? true : false} >
                   Login
               </button>
           </div>
