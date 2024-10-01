@@ -3,28 +3,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 
-using Microsoft.AspNetCore.Mvc;
-
-[ApiController]
-[Route("api/login")]
-public class DatosController : ControllerBase
-{
-    [HttpPost]
-    public IActionResult RecibirDatos([FromBody] Datos datos)
-    {
-        Console.WriteLine("");
-        Console.WriteLine("MENSAJE RECIBIDO!!!");
-        Console.WriteLine("");
-        return Ok(new { mensaje = "Datos recibidos correctamente" });
-    }
-}
-
-public class Datos
-{
-    public string Nombre { get; set; }
-    public int Edad { get; set; }
-}
-
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
