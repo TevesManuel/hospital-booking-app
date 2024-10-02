@@ -29,7 +29,7 @@ public class UserService
     
     public UserStructure findUserByDNI(string dni)
     {
-        var filter = Builders<UserStructure>.Filter.Eq(u => u.email, dni);
+        var filter = Builders<UserStructure>.Filter.Eq(u => u.dni, dni);
         return _usersCollection.Find(filter).FirstOrDefault();
     }
 }

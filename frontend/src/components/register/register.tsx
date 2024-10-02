@@ -15,6 +15,7 @@ const Register : React.FC = () => {
 
     const register = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
         fetch("api/register", {
             method: 'POST',
             headers: {
@@ -28,9 +29,8 @@ const Register : React.FC = () => {
                 address: address.value,
                 dateBirth: dateBirth.value,
             })
-        }).then(data => {
-            console.log(data);
-        });
+        })
+        .then(response => response.ok ? response.json().then(data => console.log(data)) : alert("Error on upload your data to the server."))
     };
 
     return (
@@ -52,7 +52,7 @@ const Register : React.FC = () => {
                             <div className="w-100">
                                 <label className="w-100">Email address</label>
                                 <div className="form-group registerFormInput">
-                                    <input type="email" className="form-control"aria-describedby="emailHelp" placeholder="Enter email" {...email} required={true} />
+                                    <input type="email" className="form-control" aria-describedby="emailHelp" placeholder="Enter email" {...email} required={true} />
                                 </div>
                                 <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                             </div>

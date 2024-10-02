@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 [ApiController]
 [Route("api/login")]
@@ -46,8 +48,7 @@ public class RegisterController : ControllerBase
     [HttpPost]
     public IActionResult ReceiveData([FromBody] UserStructure data)
     {
-        Console.WriteLine("Until here all good");
-        Console.WriteLine(data == null);
+        //Check data input
         if(data == null)
         {
             return BadRequest( new { message = "prompt is void" });
@@ -73,15 +74,23 @@ public class RegisterController : ControllerBase
             return BadRequest( new { message = "address is void." });
         }
         
-        Console.WriteLine($"Email is {data.email}");
-        Console.WriteLine($"Password is {data.password}");
+        //Create hash of the password
         string hashedPassword = BCrypt.Net.BCrypt.HashPassword(data.password);
         data.password = hashedPassword;
 
-        if(_userService.findUserByEmail(data.email) == null)
+        Console.WriteLine(_userService.findUserByDNI("47020963") == null);
+
+
+        //Check unique person
+        if(_userService.findUserByEmail(data.email) != null)
+        {
             return BadRequest(new { message = "Email is alredy registered." });
+        }
         if(_userService.findUserByDNI(data.dni) != null)
-            return BadRequest(new { message = "DNI is alredy registered." });
+        {
+            return BadRequest(new { message = "DNI is alredy registered." });            
+        }
+
         _userService.AddUser(data);
         // bool isPasswordValid = BCrypt.Net.BCrypt.Verify(password, hashedPassword); 
         return Ok(new { message = "Registered user" });
@@ -90,6 +99,9 @@ public class RegisterController : ControllerBase
 
 public class UserStructure
 {
+    [BsonId] // Indica que este es el identificador del documento en MongoDB
+    [BsonRepresentation(BsonType.ObjectId)] // Define que el ID es de tipo ObjectId en MongoDB
+    public string? _id { get; set; }
     public required string email { get; set; }
     public required string password { get; set; }
     public required string dni { get; set; }

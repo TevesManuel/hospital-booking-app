@@ -30,7 +30,7 @@ const Login : React.FC = () => {
             <Background />
             <div className="loginContainer">
                 <div className="loginSection">
-                    <img src={userIcon} />
+                    <img src={userIcon} alt="user icon"/>
                 </div>
                 <div className="loginSection">
                     <div>

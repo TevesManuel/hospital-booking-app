@@ -14,7 +14,7 @@ public class Program
             .ConfigureWebHostDefaults(webBuilder =>
             {
                 webBuilder.UseStartup<Startup>()
-                          .UseWebRoot(Path.Combine(Directory.GetCurrentDirectory(), "../frontend/build"))
-                          .ConfigureLogging(loggin => loggin.ClearProviders());
+                          .UseWebRoot(Path.Combine(Directory.GetCurrentDirectory(), "../frontend/build"));
+                        //   .ConfigureLogging(loggin => loggin.ClearProviders());
             });
 }
