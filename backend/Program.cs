@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 public class Program
 {
@@ -13,6 +14,7 @@ public class Program
             .ConfigureWebHostDefaults(webBuilder =>
             {
                 webBuilder.UseStartup<Startup>()
-                          .UseWebRoot(Path.Combine(Directory.GetCurrentDirectory(), "../frontend/build"));
+                          .UseWebRoot(Path.Combine(Directory.GetCurrentDirectory(), "../frontend/build"))
+                          .ConfigureLogging(loggin => loggin.ClearProviders());
             });
 }

@@ -9,7 +9,7 @@ const Register : React.FC = () => {
     const email     = useField();
     const password  = useField();
     const dni       = useField();
-    const tel       = useField();
+    const telephone = useField();
     const address   = useField();
     const dateBirth = useField();
 
@@ -24,14 +24,13 @@ const Register : React.FC = () => {
                 email: email.value,
                 password: password.value,
                 dni: dni.value,
-                tel: tel.value,
+                telephone: telephone.value,
                 address: address.value,
                 dateBirth: dateBirth.value,
             })
         }).then(data => {
             console.log(data);
         });
-        console.log(dateBirth.value);
     };
 
     return (
@@ -73,7 +72,7 @@ const Register : React.FC = () => {
                                 <div style={{flex: 5}}>
                                     <label className="w-100">Telephone</label>
                                     <div className="form-group registerFormInput">
-                                        <input type="text" className="form-control" placeholder="Telephone" {...tel} required={true} />
+                                        <input type="text" className="form-control" placeholder="Telephone" {...telephone} required={true} />
                                     </div>
                                 </div>
                             </div>
@@ -87,8 +86,8 @@ const Register : React.FC = () => {
                                 </div>
                                 <div style={{flex: 5}}>
                                     <label className="w-100">Date of Birth</label>
-                                    <div className="form-group">
-                                        <input type="date" id="fecha" className="registerFormDateInput" name="fecha" {...dateBirth} required={true} />
+                                    <div className="form-group" style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '55%'}}>
+                                        <input type="date" id="fecha" name="fecha" {...dateBirth} required={true} />
                                     </div>
                                 </div>
                             </div>
