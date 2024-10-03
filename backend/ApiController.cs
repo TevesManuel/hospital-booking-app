@@ -48,6 +48,8 @@ public class RegisterController : ControllerBase
     [HttpPost]
     public IActionResult ReceiveData([FromBody] UserStructure data)
     {
+        Console.WriteLine(data == null);
+
         //Check data input
         if(data == null)
         {
@@ -104,8 +106,12 @@ public class UserStructure
     public string? _id { get; set; }
     public required string email { get; set; }
     public required string password { get; set; }
+    public required string names { get; set; }
+    public required string lastNames { get; set; }
     public required string dni { get; set; }
     public required string telephone { get; set; }
+    public required string locality { get; set; }
+    public required string zipCode { get; set; }
     public required string address { get; set; }
     public required DateTime dateBirth { get; set; }
 }

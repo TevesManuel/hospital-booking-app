@@ -1,61 +1,7 @@
 import React from 'react';
-import { styled } from '@mui/joy/styles';
-import Input from '@mui/joy/Input';
-import CheckCircleOutlined from '@mui/icons-material/CheckCircleOutlined';
 import { useFieldValues } from '../../../hooks/useField/useField';
-
-const StyledInput = styled('input')({
-    border: 'none', 
-    minWidth: 0,
-    outline: 0,
-    padding: 0,
-    paddingTop: '1em',
-    flex: 1,
-    color: 'inherit',
-    backgroundColor: 'transparent',
-    fontFamily: 'inherit',
-    fontSize: 'inherit',
-    fontStyle: 'inherit',
-    fontWeight: 'inherit',
-    lineHeight: 'inherit',
-    textOverflow: 'ellipsis',
-    width: '100%',
-    '&::placeholder': {
-    opacity: 0,
-    transition: '0.1s ease-out',
-    },
-    '&:focus::placeholder': {
-        opacity: 1,
-    },
-    '&:focus ~ label, &:not(:placeholder-shown) ~ label, &:-webkit-autofill ~ label': {
-        top: '0.5rem',
-        fontSize: '0.75rem',
-    },
-    '&:focus ~ label': {
-        color: 'var(--Input-focusedHighlight)',
-    },
-    '&:-webkit-autofill': {
-        alignSelf: 'stretch', // to fill the height of the root slot
-    },
-    '&:-webkit-autofill:not(* + &)': {
-        marginInlineStart: 'calc(-1 * var(--Input-paddingInline))',
-        paddingInlineStart: 'var(--Input-paddingInline)',
-        borderTopLeftRadius:
-        'calc(var(--Input-radius) - var(--variant-borderWidth, 0px))',
-        borderBottomLeftRadius:
-        'calc(var(--Input-radius) - var(--variant-borderWidth, 0px))',
-    },
-});
-
-const StyledLabel = styled('label')(({ theme }) => ({
-    position: 'absolute',
-    lineHeight: 1,
-    top: 'calc((var(--Input-minHeight) - 1em) / 2)',
-    color: theme.vars.palette.text.tertiary,
-    fontWeight: theme.vars.fontWeight.md,
-    transition: 'all 150ms cubic-bezier(0.4, 0, 0.2, 1)',
-}));
-
+import { LinearProgress, Stack, Typography } from '@mui/joy';
+import TextField from '@mui/material/TextField';
 
 interface TInputProps {
     inputValues: useFieldValues;
@@ -64,27 +10,100 @@ interface TInputProps {
     type : 'email' | 'password' | 'telephone' | 'dni' | 'normal',
 }
 
-const TInput : React.FC<TInputProps> = ({inputValues, label, placeholder}) => {
-    const InnerInput = React.forwardRef<
-    HTMLInputElement,
-    React.JSX.IntrinsicElements['input']
-        >(function InnerInput(props, ref) {
-        const id = React.useId();
+const TInput : React.FC<TInputProps> = ({inputValues, label, placeholder, type}) => {
+
+    if(type === 'password')
+    {
+        const minLength = 12;
         return (
-        <React.Fragment>
-            <StyledInput {...props} ref={ref} id={id} />
-            <StyledLabel htmlFor={id}>{label}</StyledLabel>
-        </React.Fragment>
+            <Stack width={"100%"} spacing={0.5} sx={{ '--hue': Math.min(inputValues.value.length * 10, 120) }}>
+                <TextField 
+                    label={label}
+                    variant="outlined"
+                    {...inputValues}
+                    type='password'
+                    fullWidth
+                    required
+                >
+                    <button>asd</button>
+                    </TextField>
+                <LinearProgress
+                    determinate
+                    size="sm"
+                    value={Math.min((inputValues.value.length * 100) / minLength, 100)}
+                    sx={{ bgcolor: 'background.level3', color: 'hsl(var(--hue) 80% 40%)' }}
+                />
+                <Typography
+                    level="body-xs"
+                    sx={{ alignSelf: 'flex-end', color: 'hsl(var(--hue) 80% 30%)' }}
+                >
+                    {inputValues.value.length == 0 && ''}
+                    {inputValues.value.length != 0 && inputValues.value.length < 3 && 'Very weak'}
+                    {inputValues.value.length >= 3 && inputValues.value.length < 6 && 'Weak'}
+                    {inputValues.value.length >= 6 && inputValues.value.length < 10 && 'Strong'}
+                    {inputValues.value.length >= 10 && 'Very strong'}
+                </Typography>
+            </Stack>
         );
-    });
-    
+    }
+    else if (type === 'email')
+    {
+        const checkEmail = () : boolean => {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(inputValues.value);
+        }
+
+        return (<TextField 
+            label={label}
+            variant="outlined"
+            {...inputValues}
+            type='text'
+            placeholder={placeholder}
+            fullWidth={true}
+            color={checkEmail() ? 'success' : 'error'}
+            required
+        />);
+    }
+    else if (type === 'telephone')
+    {
+        const formatPhoneNumber = (input: string): string => {
+            const cleaned = input.replace(/\D/g, '');
+            const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+            if (match)
+                return `(${match[1]}) ${match[2]} ${match[3]}`;    
+            return input;
+        }
+        return (<TextField 
+            label={label}
+            variant="outlined"
+            value={formatPhoneNumber(inputValues.value)}
+            onChange={(e : React.ChangeEvent<HTMLInputElement>)=>inputValues.onChange(e)}
+            placeholder={placeholder}
+            color={inputValues.value.length < 10 ? 'error' : 'success'}
+            required
+        />);
+    }
+    else if (type === 'dni')
+    {
+        return (<TextField 
+            label={label}
+            variant="outlined"
+            {...inputValues}
+            placeholder={placeholder}
+            color={inputValues.value.length !== 8 ? 'error' : 'success'}
+            required
+        />);
+    }
+
     return (
-        <Input
+        <TextField 
+            label={label}
+            variant="outlined"
+            {...inputValues}
+            type='text'
+            placeholder={placeholder}
             fullWidth
-            endDecorator={<CheckCircleOutlined color='success' />}
-            slots={{ input: InnerInput }}
-            slotProps={{ input: { placeholder: placeholder } }}
-            sx={{ '--Input-minHeight': '50px', '--Input-radius': '6px' }}
+            required
         />
     );
 };
