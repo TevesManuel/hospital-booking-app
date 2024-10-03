@@ -3,6 +3,7 @@ import "./register.css";
 import Background from "../background/background";
 import userIcon from "./assets/user.svg";
 import useField from "../../hooks/useField/useField";
+import { toast } from 'react-toastify';
 
 const Register : React.FC = () => {
 
@@ -15,6 +16,8 @@ const Register : React.FC = () => {
 
     const register = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        const id = toast.loading("Please wait...")
 
         fetch("api/register", {
             method: 'POST',
@@ -30,7 +33,19 @@ const Register : React.FC = () => {
                 dateBirth: dateBirth.value,
             })
         })
-        .then(response => response.ok ? response.json().then(data => console.log(data)) : alert("Error on upload your data to the server."))
+        .then(response => {
+            if(response.ok)
+            {
+                response.json().then(data => {
+                    console.log(data);
+                    toast.update(id, { render: `Hi ${data.name}`, type: "success", isLoading: false, autoClose: 3000  });
+                })
+            }
+            else
+            {
+                toast.update(id, { render:"Error", type:"error", isLoading: false, autoClose: 3000 });
+            }
+        })
     };
 
     return (
@@ -52,7 +67,8 @@ const Register : React.FC = () => {
                             <div className="w-100">
                                 <label className="w-100">Email address</label>
                                 <div className="form-group registerFormInput">
-                                    <input type="email" className="form-control" aria-describedby="emailHelp" placeholder="Enter email" {...email} required={true} />
+
+                                    {/* <input type="email" className="form-control" aria-describedby="emailHelp" placeholder="Enter email" {...email} required={true} /> */}
                                 </div>
                                 <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                             </div>
