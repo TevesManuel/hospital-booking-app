@@ -4,6 +4,7 @@ import Background from "../background/background";
 import userIcon from "./assets/user.svg";
 import useField from "../../hooks/useField/useField";
 import { toast } from 'react-toastify';
+import TInput from "../basics/TInput/TInput";
 
 const Register : React.FC = () => {
 
@@ -65,39 +66,33 @@ const Register : React.FC = () => {
                         <form className="loginForm" onSubmit={register}>
                             
                             <div className="w-100">
-                                <label className="w-100">Email address</label>
                                 <div className="form-group registerFormInput">
-
-                                    {/* <input type="email" className="form-control" aria-describedby="emailHelp" placeholder="Enter email" {...email} required={true} /> */}
+                                    <TInput inputValues={email} placeholder="user@email.com" label="Email" type="email"/>
                                 </div>
                                 <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                             </div>
 
-                            <label className="w-100">Password</label>
                             <div className="form-group registerFormInput">
-                                <input type="password" className="form-control" placeholder="Password" {...password} required={true}  />
+                                <TInput inputValues={password} placeholder="" label="Password" type="password"/>
                             </div>
                             
                             <div style={{display: 'flex'}}>
                                 <div style={{flex: 5}}>
-                                    <label className="w-100">D.N.I</label>
                                     <div className="form-group registerFormInput">
-                                        <input type="text" className="form-control" placeholder="Your D.N.I" {...dni} required={true}  />
+                                        <TInput inputValues={dni} placeholder="xx.xxx.xxx" label="D.N.I" type="dni"/>
                                     </div>
                                 </div>
                                 <div style={{flex: 5}}>
-                                    <label className="w-100">Telephone</label>
                                     <div className="form-group registerFormInput">
-                                        <input type="text" className="form-control" placeholder="Telephone" {...telephone} required={true} />
+                                        <TInput inputValues={telephone} placeholder="(xxx) xxx xxxx" label="Telephone" type="telephone"/>
                                     </div>
                                 </div>
                             </div>
 
                             <div style={{display: 'flex', width: '100%'}}>
                                 <div style={{flex: 5}}>
-                                    <label className="w-100">Address</label>
                                     <div className="form-group registerFormInput">
-                                        <input type="text" className="form-control" placeholder="Telephone" {...address} required={true} />
+                                        <TInput inputValues={address} placeholder="Cx e/x y x" label="Adress" type="normal"/>
                                     </div>
                                 </div>
                                 <div style={{flex: 5}}>
