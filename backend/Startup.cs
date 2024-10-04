@@ -3,11 +3,20 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 
+using Microsoft.AspNetCore.Http;
+
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddSingleton(new MongoDBContext());
+        services.AddSingleton<UserService>();
         services.AddControllers();
+        services.ConfigureApplicationCookie(options =>
+        {
+            options.Cookie.SameSite = SameSiteMode.Strict;
+            options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+        });
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -23,7 +32,6 @@ public class Startup
         }
 
         app.UseHttpsRedirection();
-        // Servir archivos de la carpeta build de React
         app.UseStaticFiles();
 
         app.UseRouting();
@@ -31,7 +39,7 @@ public class Startup
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
-            endpoints.MapFallbackToFile("index.html"); // Mapea todas las rutas a index.html
+            endpoints.MapFallbackToFile("index.html");
         });
     }
 }

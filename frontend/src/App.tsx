@@ -6,10 +6,10 @@ import Footer from './components/footer/footer';
 import ErrorPage from './components/errorPage/errorPage';
 import Login from './components/login/login';
 import Register from './components/register/register';
-
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 import {
     Routes, Route,
-    useMatch
 } from 'react-router-dom';
 
 
@@ -24,6 +24,19 @@ function App() {
                 <Route path="/*" element={<ErrorPage />} />
             </Routes>
             <Footer />
+            <ToastContainer
+                position="bottom-left"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                // transition: Bounce
+            />
         </div>
     );
 }
