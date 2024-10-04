@@ -1,5 +1,4 @@
 using MongoDB.Driver;
-using System.Collections.Generic;
 
 public class UserService
 {
@@ -31,5 +30,13 @@ public class UserService
     {
         var filter = Builders<UserStructure>.Filter.Eq(u => u.dni, dni);
         return _usersCollection.Find(filter).FirstOrDefault();
+    }
+
+    public bool login(LoginDataStructure loginDataStructure)
+    {
+        return BCrypt.Net.BCrypt.Verify(
+            loginDataStructure.password, 
+            findUserByEmail(loginDataStructure.email).password
+        ); 
     }
 }

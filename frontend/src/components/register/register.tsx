@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import "./register.css";
 import Background from "../background/background";
 import userIcon from "./assets/user.svg";
@@ -9,6 +10,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import Button from '@mui/material/Button';
+import { Dayjs } from "dayjs";
 
 const Register : React.FC = () => {
 
@@ -18,10 +20,10 @@ const Register : React.FC = () => {
     const lastNames = useField();
     const dni       = useField();
     const telephone = useField();
-    const locality = useField();
-    const zipCode = useField();
+    const locality  = useField();
+    const zipCode   = useField();
     const address   = useField();
-    const dateBirth = useField();
+    const [dateBirth, setDateBirth] = useState("");
 
     console.log("ads");
 
@@ -29,6 +31,8 @@ const Register : React.FC = () => {
         e.preventDefault();
 
         const toastId = toast.loading("Please wait...")
+
+        console.log(dateBirth);
 
         fetch("api/register", {
             method: 'POST',
@@ -38,10 +42,14 @@ const Register : React.FC = () => {
             body: JSON.stringify({
                 email: email.value,
                 password: password.value,
+                names: names.value,
+                lastNames: lastNames.value,
                 dni: dni.value,
                 telephone: telephone.value,
+                locality: locality.value,
+                zipCode: zipCode.value,
                 address: address.value,
-                dateBirth: dateBirth.value,
+                dateBirth: dateBirth,
             })
         })
         .then(response => {
@@ -49,12 +57,21 @@ const Register : React.FC = () => {
             {
                 response.json().then(data => {
                     console.log(data);
-                    toast.update(toastId, { render: `Hi ${data.name}`, type: "success", isLoading: false, autoClose: 3000  });
+                    toast.update(toastId, { render: `Hi ${data.names.split(" ")[0]}`, type: "success", isLoading: false, autoClose: 3000  });
                 })
             }
             else
             {
-                toast.update(toastId, { render:"Error", type:"error", isLoading: false, autoClose: 3000 });
+                response.json().then(data => {
+                    if (data)
+                    {
+                        toast.update(toastId, { render:`Error: ${data.message}`, type:"error", isLoading: false, autoClose: 3000 });
+                    }
+                    else
+                    {
+                        toast.update(toastId, { render:"Error", type:"error", isLoading: false, autoClose: 3000 });                        
+                    }
+                })
             }
         })
     };
@@ -136,6 +153,11 @@ const Register : React.FC = () => {
                                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <DatePicker
                                         label="Date of birth"
+                                        onChange={(value: Dayjs | null, context: any) => {
+                                            if (value) {
+                                                setDateBirth(value.format('MM-DD-YYYY'))
+                                            }
+                                        }}
                                     />
                                     </LocalizationProvider>
                                     </div>

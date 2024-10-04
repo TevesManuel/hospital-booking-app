@@ -16,6 +16,6 @@
     margin-bottom: 40px;
     display: flex;
     justify-content: space-between;
-    max-height: 300px;
+    max-height: 31dvh;
     overflow-y: scroll;
 }

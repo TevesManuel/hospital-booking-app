@@ -20,8 +20,10 @@ const Login : React.FC = () => {
                 email: email.value,
                 password: password.value,
             })
-        }).then(data => {
-            console.log(data);
+        }).then(response => {
+            response.json().then(data => {
+                console.log(data);
+            })
         });
     };
 

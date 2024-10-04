@@ -6,9 +6,17 @@ using MongoDB.Bson.Serialization.Attributes;
 [Route("api/login")]
 public class LoginController : ControllerBase
 {
+    private readonly UserService _userService;
+
+    public LoginController(UserService userService)
+    {
+        _userService = userService;
+    }
+
     [HttpPost]
     public IActionResult ReceiveData([FromBody] LoginDataStructure data)
     {
+        // Console.WriteLine(data == null);
         if(data == null)
         {
             return BadRequest( new { message = "prompt is void" });
@@ -23,8 +31,7 @@ public class LoginController : ControllerBase
         }
         Console.WriteLine($"Email is {data.email}");
         Console.WriteLine($"Password is {data.password}");
-        string hashedPassword = BCrypt.Net.BCrypt.HashPassword(data.password);
-        // bool isPasswordValid = BCrypt.Net.BCrypt.Verify(password, hashedPassword);
+        Console.WriteLine($"Login return {_userService.login(data)}");
         return Ok(new { message = "Datos recibidos correctamente." });
     }
 }
@@ -48,9 +55,8 @@ public class RegisterController : ControllerBase
     [HttpPost]
     public IActionResult ReceiveData([FromBody] UserStructure data)
     {
-        Console.WriteLine(data == null);
+        // Console.WriteLine(data == null);
 
-        //Check data input
         if(data == null)
         {
             return BadRequest( new { message = "prompt is void" });
@@ -63,6 +69,14 @@ public class RegisterController : ControllerBase
         {
             return BadRequest( new { message = "password is void." });
         }
+        if(string.IsNullOrEmpty(data.names))
+        {
+            return BadRequest( new { message = "names is void." });
+        }
+        if(string.IsNullOrEmpty(data.lastNames))
+        {
+            return BadRequest( new { message = "last names is void." });
+        }
         if(string.IsNullOrEmpty(data.dni))
         {
             return BadRequest( new { message = "dni is void." });
@@ -71,9 +85,17 @@ public class RegisterController : ControllerBase
         {
             return BadRequest( new { message = "telephone is void." });
         }
-        if(string.IsNullOrEmpty(data.address))
+        if(string.IsNullOrEmpty(data.locality))
         {
-            return BadRequest( new { message = "address is void." });
+            return BadRequest( new { message = "locality is void." });
+        }
+        if(string.IsNullOrEmpty(data.zipCode))
+        {
+            return BadRequest( new { message = "zip code is void." });
+        }
+        if(string.IsNullOrEmpty(data.dateBirth))
+        {
+            return BadRequest( new { message = "date birth is void." });
         }
         
         //Create hash of the password
@@ -94,15 +116,14 @@ public class RegisterController : ControllerBase
         }
 
         _userService.AddUser(data);
-        // bool isPasswordValid = BCrypt.Net.BCrypt.Verify(password, hashedPassword); 
-        return Ok(new { message = "Registered user" });
+        return Ok(data);
     }
 }
 
 public class UserStructure
 {
-    [BsonId] // Indica que este es el identificador del documento en MongoDB
-    [BsonRepresentation(BsonType.ObjectId)] // Define que el ID es de tipo ObjectId en MongoDB
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
     public string? _id { get; set; }
     public required string email { get; set; }
     public required string password { get; set; }
@@ -113,5 +134,5 @@ public class UserStructure
     public required string locality { get; set; }
     public required string zipCode { get; set; }
     public required string address { get; set; }
-    public required DateTime dateBirth { get; set; }
+    public required string dateBirth { get; set; }
 }

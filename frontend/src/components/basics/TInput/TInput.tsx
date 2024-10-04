@@ -2,6 +2,7 @@ import React from 'react';
 import { useFieldValues } from '../../../hooks/useField/useField';
 import { LinearProgress, Stack, Typography } from '@mui/joy';
 import TextField from '@mui/material/TextField';
+import './TInput.css';
 
 interface TInputProps {
     inputValues: useFieldValues;
@@ -24,6 +25,7 @@ const TInput : React.FC<TInputProps> = ({inputValues, label, placeholder, type})
                     type='password'
                     fullWidth
                     required
+                    className='TInput'
                 >
                     <button>asd</button>
                     </TextField>
@@ -38,7 +40,7 @@ const TInput : React.FC<TInputProps> = ({inputValues, label, placeholder, type})
                     sx={{ alignSelf: 'flex-end', color: 'hsl(var(--hue) 80% 30%)' }}
                 >
                     {inputValues.value.length == 0 && ''}
-                    {inputValues.value.length != 0 && inputValues.value.length < 3 && 'Very weak'}
+                    {inputValues.value.length !== 0 && inputValues.value.length < 3 && 'Very weak'}
                     {inputValues.value.length >= 3 && inputValues.value.length < 6 && 'Weak'}
                     {inputValues.value.length >= 6 && inputValues.value.length < 10 && 'Strong'}
                     {inputValues.value.length >= 10 && 'Very strong'}
@@ -81,6 +83,7 @@ const TInput : React.FC<TInputProps> = ({inputValues, label, placeholder, type})
             placeholder={placeholder}
             color={inputValues.value.length < 10 ? 'error' : 'success'}
             required
+            className='TInput'
         />);
     }
     else if (type === 'dni')
@@ -92,6 +95,7 @@ const TInput : React.FC<TInputProps> = ({inputValues, label, placeholder, type})
             placeholder={placeholder}
             color={inputValues.value.length !== 8 ? 'error' : 'success'}
             required
+            className='TInput'
         />);
     }
 
@@ -104,6 +108,7 @@ const TInput : React.FC<TInputProps> = ({inputValues, label, placeholder, type})
             placeholder={placeholder}
             fullWidth
             required
+            className='TInput'
         />
     );
 };
