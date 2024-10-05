@@ -7,10 +7,13 @@ import TInput from "../basics/TInput/TInput";
 import Button from '@mui/material/Button';
 import { toast } from 'react-toastify';
 
-const Login : React.FC = () => {
+import { useNavigate } from 'react-router-dom';
 
+const Login : React.FC = () => {
     const email = useField();
     const password = useField();
+
+    const navigate = useNavigate();
 
     const login = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -33,6 +36,7 @@ const Login : React.FC = () => {
                     if(data.names)
                     {
                         toast.update(toastId, { render: `Hi ${data.names.split(" ")[0]}`, type: "success", isLoading: false, autoClose: 3000  });
+                        navigate("/home");
                     }
                     else
                     {

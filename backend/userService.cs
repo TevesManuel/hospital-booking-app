@@ -1,3 +1,4 @@
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 public class UserService
@@ -32,11 +33,18 @@ public class UserService
         return _usersCollection.Find(filter).FirstOrDefault();
     }
 
-    public bool login(LoginDataStructure loginDataStructure)
+    public UserStructure? login(LoginDataStructure loginDataStructure)
     {
-        return BCrypt.Net.BCrypt.Verify(
-            loginDataStructure.password, 
-            findUserByEmail(loginDataStructure.email).password
-        ); 
+        UserStructure user = findUserByEmail(loginDataStructure.email);
+        Console.WriteLine(user.ToJson().ToString());
+        if(user != null)
+        {
+            if(BCrypt.Net.BCrypt.Verify(
+                loginDataStructure.password, 
+                user.password
+            ))
+                return user;
+        }
+        return null;
     }
 }

@@ -52,7 +52,7 @@ const TInput : React.FC<TInputProps> = ({inputValues, label, placeholder, type})
                     level="body-xs"
                     sx={{ alignSelf: 'flex-end', color: 'hsl(var(--hue) 80% 30%)' }}
                 >
-                    {inputValues.value.length == 0 && ''}
+                    {inputValues.value.length === 0 && ''}
                     {inputValues.value.length !== 0 && inputValues.value.length < 3 && 'Very weak'}
                     {inputValues.value.length >= 3 && inputValues.value.length < 6 && 'Weak'}
                     {inputValues.value.length >= 6 && inputValues.value.length < 10 && 'Strong'}
