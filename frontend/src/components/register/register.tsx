@@ -32,8 +32,6 @@ const Register : React.FC = () => {
 
         const toastId = toast.loading("Please wait...")
 
-        console.log(dateBirth);
-
         fetch("api/register", {
             method: 'POST',
             headers: {
@@ -56,7 +54,7 @@ const Register : React.FC = () => {
             if(response.ok)
             {
                 response.json().then(data => {
-                    console.log(data);
+                    // console.log(data);
                     toast.update(toastId, { render: `Hi ${data.names.split(" ")[0]}`, type: "success", isLoading: false, autoClose: 3000  });
                 })
             }
@@ -100,7 +98,7 @@ const Register : React.FC = () => {
                             </div>
 
                             <div className="form-group registerFormInput w-100">
-                                <TInput inputValues={password} placeholder="" label="Password" type="password"/>
+                                <TInput inputValues={password} placeholder="" label="Password" type="registerPassword"/>
                             </div>
 
                             <div className="registerRowInput">
@@ -165,7 +163,6 @@ const Register : React.FC = () => {
                             </div>
 
                             <Button type="submit" variant="outlined" className="m-2 w-50">Register</Button>
-                            {/* <button type="submit" className="btn btn-primary m-3" >Submit</button> */}
                         </form>
                     </div>
                 </div>

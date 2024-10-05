@@ -3,6 +3,9 @@ import "./login.css";
 import Background from "../background/background";
 import userIcon from "./assets/user.svg";
 import useField from "../../hooks/useField/useField";
+import TInput from "../basics/TInput/TInput";
+import Button from '@mui/material/Button';
+import { toast } from 'react-toastify';
 
 const Login : React.FC = () => {
 
@@ -11,6 +14,8 @@ const Login : React.FC = () => {
 
     const login = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const toastId = toast.loading("Please wait...")
+
         fetch("api/login", {
             method: 'POST',
             headers: {
@@ -20,11 +25,35 @@ const Login : React.FC = () => {
                 email: email.value,
                 password: password.value,
             })
-        }).then(response => {
-            response.json().then(data => {
-                console.log(data);
-            })
-        });
+        })
+        .then(response => {
+            if(response.ok)
+            {
+                response.json().then(data => {
+                    if(data.names)
+                    {
+                        toast.update(toastId, { render: `Hi ${data.names.split(" ")[0]}`, type: "success", isLoading: false, autoClose: 3000  });
+                    }
+                    else
+                    {
+                        toast.update(toastId, { render:"Error", type:"error", isLoading: false, autoClose: 3000 });
+                    }
+                })
+            }
+            else
+            {
+                response.json().then(data => {
+                    if (data)
+                    {
+                        toast.update(toastId, { render:`Error: ${data.message}`, type:"error", isLoading: false, autoClose: 3000 });
+                    }
+                    else
+                    {
+                        toast.update(toastId, { render:"Error", type:"error", isLoading: false, autoClose: 3000 });                        
+                    }
+                })
+            }
+        })
     };
 
     return (
@@ -35,7 +64,7 @@ const Login : React.FC = () => {
                     <img src={userIcon} alt="user icon"/>
                 </div>
                 <div className="loginSection">
-                    <div>
+                    <div className="w-100 m-4">
                         <div className="centerText">
                             <h3 className="mfont">
                                 Login
@@ -43,15 +72,13 @@ const Login : React.FC = () => {
                         </div>
                         <form className="loginForm" onSubmit={login}>
                             <div className="input-group mb-3 loginFormInput">
-                                <span className="input-group-text" id="basic-addon1">email</span>
-                                <input type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" {...email} />
+                            <TInput inputValues={email} placeholder="user@email.com" label="Email" type="email"/>
                             </div>
 
                             <div className="input-group mb-3 loginFormInput">
-                                <span className="input-group-text" id="basic-addon1">password</span>
-                                <input type="password" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" {...password} />
+                                <TInput inputValues={password} placeholder="" label="Password" type="password"/>
                             </div>
-                            <button type="submit" className="btn btn-primary" >Submit</button>
+                            <Button type="submit" variant="contained" className="m-2 w-50">Login</Button>
                             <div className="anotherLoginOptions">
                                 <a href="/forgot-your-password">Forgot your password?</a>
                                 <a href="/register">Register</a>

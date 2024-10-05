@@ -8,12 +8,26 @@ interface TInputProps {
     inputValues: useFieldValues;
     label: string,
     placeholder: string,
-    type : 'email' | 'password' | 'telephone' | 'dni' | 'normal',
+    type : 'email' | 'password' | 'registerPassword' | 'telephone' | 'dni' | 'normal',
 }
 
 const TInput : React.FC<TInputProps> = ({inputValues, label, placeholder, type}) => {
 
     if(type === 'password')
+    {
+        return (
+                <TextField 
+                    label={label}
+                    variant="outlined"
+                    {...inputValues}
+                    type='password'
+                    fullWidth
+                    required
+                    className='TInput'
+                />
+        );
+    }
+    else if(type === 'registerPassword')
     {
         const minLength = 12;
         return (
@@ -26,9 +40,8 @@ const TInput : React.FC<TInputProps> = ({inputValues, label, placeholder, type})
                     fullWidth
                     required
                     className='TInput'
-                >
-                    <button>asd</button>
-                    </TextField>
+                    
+                />
                 <LinearProgress
                     determinate
                     size="sm"
