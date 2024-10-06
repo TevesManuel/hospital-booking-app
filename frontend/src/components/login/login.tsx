@@ -9,11 +9,15 @@ import { toast } from 'react-toastify';
 
 import { useNavigate } from 'react-router-dom';
 
+import { useUserDispatch } from "../../context/user";
+
 const Login : React.FC = () => {
     const email = useField();
     const password = useField();
 
     const navigate = useNavigate();
+
+    const userDispatch = useUserDispatch();
 
     const login = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -36,6 +40,12 @@ const Login : React.FC = () => {
                     if(data.names)
                     {
                         toast.update(toastId, { render: `Hi ${data.names.split(" ")[0]}`, type: "success", isLoading: false, autoClose: 3000  });
+                        userDispatch(
+                            {
+                                type: 'LOGIN',
+                                payload: data
+                            }
+                        )
                         navigate("/home");
                     }
                     else
