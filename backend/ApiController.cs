@@ -137,6 +137,7 @@ public class UserStructure
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
     public string? _id { get; set; }
+    public string? type { get; set; }
     public required string email { get; set; }
     public required string password { get; set; }
     public required string names { get; set; }

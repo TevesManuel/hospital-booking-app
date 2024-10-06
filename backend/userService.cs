@@ -17,6 +17,7 @@ public class UserService
 
     public void AddUser(UserStructure user)
     {
+        user.type = "patient";
         _usersCollection.InsertOne(user);
     }
 
