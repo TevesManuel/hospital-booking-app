@@ -11,6 +11,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import Button from '@mui/material/Button';
 import { Dayjs } from "dayjs";
+import { useNavigate } from "react-router-dom";
 
 const Register : React.FC = () => {
 
@@ -25,14 +26,12 @@ const Register : React.FC = () => {
     const address   = useField();
     const [dateBirth, setDateBirth] = useState("");
 
-    console.log("ads");
+    const navigate = useNavigate();
 
     const register = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const toastId = toast.loading("Please wait...")
-
-        console.log(dateBirth);
 
         fetch("api/register", {
             method: 'POST',
@@ -56,7 +55,7 @@ const Register : React.FC = () => {
             if(response.ok)
             {
                 response.json().then(data => {
-                    console.log(data);
+                    navigate("/login");
                     toast.update(toastId, { render: `Hi ${data.names.split(" ")[0]}`, type: "success", isLoading: false, autoClose: 3000  });
                 })
             }
@@ -100,7 +99,7 @@ const Register : React.FC = () => {
                             </div>
 
                             <div className="form-group registerFormInput w-100">
-                                <TInput inputValues={password} placeholder="" label="Password" type="password"/>
+                                <TInput inputValues={password} placeholder="" label="Password" type="registerPassword"/>
                             </div>
 
                             <div className="registerRowInput">
@@ -165,7 +164,6 @@ const Register : React.FC = () => {
                             </div>
 
                             <Button type="submit" variant="outlined" className="m-2 w-50">Register</Button>
-                            {/* <button type="submit" className="btn btn-primary m-3" >Submit</button> */}
                         </form>
                     </div>
                 </div>

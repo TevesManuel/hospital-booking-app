@@ -5,12 +5,15 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
+import { UserContextProvider } from './context/user';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 root.render(
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>
+    <UserContextProvider>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </UserContextProvider>
 );

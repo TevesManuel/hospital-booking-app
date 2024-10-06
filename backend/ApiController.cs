@@ -31,8 +31,11 @@ public class LoginController : ControllerBase
         }
         Console.WriteLine($"Email is {data.email}");
         Console.WriteLine($"Password is {data.password}");
-        Console.WriteLine($"Login return {_userService.login(data)}");
-        return Ok(new { message = "Datos recibidos correctamente." });
+        UserStructure? user = _userService.login(data);
+        Console.WriteLine($"Login return {user != null}");
+        if(user != null)
+            return Ok(user);
+        return BadRequest(new { message = "Email or password are wrong." });
     }
 }
 

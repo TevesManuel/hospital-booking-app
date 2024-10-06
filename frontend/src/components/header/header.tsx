@@ -3,9 +3,16 @@ import './header.css';
 
 import { useNavigate, useLocation } from 'react-router-dom';
 
+import { useUserValue } from "../../context/user";
+
+
 const Header : React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
+
+    const userValue = useUserValue();
+
+    console.log("Header", userValue);
 
     console.log(location.pathname);
 
