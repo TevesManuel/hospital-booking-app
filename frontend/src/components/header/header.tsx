@@ -12,6 +12,8 @@ const Header : React.FC = () => {
         if (savedUser) {
             userDispatch({ type: 'SET', payload: JSON.parse(savedUser) });
         }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
