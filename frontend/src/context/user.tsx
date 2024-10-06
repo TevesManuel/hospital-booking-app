@@ -1,25 +1,24 @@
 import { createContext, useReducer, useContext, ReactNode } from 'react';
 
 type User = {
-    id: string;
-    email: string;
-    password: string;
+    email: string,
     names: string;
-    lastNames: string;
-    dni: string;
-    telephone: string;
-    locality: string;
-    zipCode: string;
-    address: string;
-    dateBirth: string;
+    lastNames: string,
+    birthDate: string
+    type: string
+    token: string;
 } | null;
 
 type Action = 
-    | { type: 'LOGIN', payload: User } 
-    | { type: 'LOGOUT' };
+    | { type: 'SET'   , payload: User }
+    | { type: 'LOGIN' , payload: User } 
+    | { type: 'LOGOUT'                };
 
 const userReducer = (state: User, action: Action): User => {
     switch (action.type) {
+        case 'SET':
+            window.localStorage.setItem('user', JSON.stringify(action.payload));
+            return action.payload;
         case 'LOGIN':
             window.localStorage.setItem('user', JSON.stringify(action.payload));
             return action.payload;

@@ -37,21 +37,21 @@ const Login : React.FC = () => {
             if(response.ok)
             {
                 response.json().then(data => {
-                    if(data.names)
-                    {
-                        toast.update(toastId, { render: `Hi ${data.names.split(" ")[0]}`, type: "success", isLoading: false, autoClose: 3000  });
-                        userDispatch(
-                            {
-                                type: 'LOGIN',
-                                payload: data
-                            }
-                        )
-                        navigate("/home");
-                    }
-                    else
-                    {
-                        toast.update(toastId, { render:"Error", type:"error", isLoading: false, autoClose: 3000 });
-                    }
+                    const base64Url = data.token.split('.')[1];
+                    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                    const jsonPayload = decodeURIComponent(escape(atob(base64)));
+                    let parsedData = JSON.parse(jsonPayload);
+                    toast.update(toastId, { render: `Hi ${parsedData.names.split(" ")[0]}`, type: "success", isLoading: false, autoClose: 3000  });
+                    userDispatch(
+                        {
+                            type: 'LOGIN',
+                            payload: {
+                                ...parsedData,
+                                token: data.token
+                            }            
+                        }
+                    )
+                    navigate("/home");
                 })
             }
             else
@@ -63,7 +63,7 @@ const Login : React.FC = () => {
                     }
                     else
                     {
-                        toast.update(toastId, { render:"Error", type:"error", isLoading: false, autoClose: 3000 });                        
+                        toast.update(toastId, { render:"Error 000", type:"error", isLoading: false, autoClose: 3000 });                        
                     }
                 })
             }

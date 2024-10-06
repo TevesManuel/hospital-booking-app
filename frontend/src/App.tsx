@@ -7,7 +7,7 @@ import ErrorPage from './components/errorPage/errorPage';
 import Login from './components/login/login';
 import Register from './components/register/register';
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
+import { Bounce, ToastContainer } from 'react-toastify';
 import {
     Routes, Route,
 } from 'react-router-dom';
@@ -36,8 +36,8 @@ function App() {
                 draggable
                 pauseOnHover
                 theme="light"
-                // transition: Bounce
-            />
+                transition={Bounce}
+                />
         </div>
     );
 }

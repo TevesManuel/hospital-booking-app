@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
@@ -14,6 +15,7 @@ public class LoginController : ControllerBase
     }
 
     [HttpPost]
+    [AllowAnonymous]
     public IActionResult ReceiveData([FromBody] LoginDataStructure data)
     {
         // Console.WriteLine(data == null);
@@ -34,7 +36,14 @@ public class LoginController : ControllerBase
         UserStructure? user = _userService.login(data);
         Console.WriteLine($"Login return {user != null}");
         if(user != null)
-            return Ok(user);
+        {
+            string? token = _userService.GenerateJwtToken(user);
+            if(token != null)
+            {
+                return StatusCode(200,  new { token });
+            }
+            return StatusCode(500, new { message = "Internal server error." });
+        }
         return BadRequest(new { message = "Email or password are wrong." });
     }
 }

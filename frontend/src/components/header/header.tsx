@@ -1,24 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import './header.css';
-
-import { useNavigate, useLocation } from 'react-router-dom';
-
-import { useUserValue } from "../../context/user";
-
+import MutablePart from "./mutablePart/mutablePart";
+import { useUserDispatch } from "../../context/user";
 
 const Header : React.FC = () => {
-    const navigate = useNavigate();
-    const location = useLocation();
 
-    const userValue = useUserValue();
+    const userDispatch = useUserDispatch();
 
-    console.log("Header", userValue);
-
-    console.log(location.pathname);
-
-    const redirectToLoginPage = () => {
-      navigate('/login');
-    };
+    useEffect(() => {
+        const savedUser = window.localStorage.getItem('user');
+        if (savedUser) {
+            userDispatch({ type: 'SET', payload: JSON.parse(savedUser) });
+        }
+    }, []);
 
     return (
         <header>
@@ -29,9 +23,9 @@ const Header : React.FC = () => {
                 </a>
           </div>
           <div className="subHeaderDiv" >
-              <button id="loginButtonHeader" className="btn btn-primary" onClick={redirectToLoginPage} disabled={location.pathname === '/login' ? true : false} >
-                  Login
-              </button>
+                <div id="loginButtonHeader">
+                    <MutablePart/>
+                </div>
           </div>
         </header>
     );
