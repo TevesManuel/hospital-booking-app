@@ -11,19 +11,23 @@ import { Bounce, ToastContainer } from 'react-toastify';
 import {
     Routes, Route,
 } from 'react-router-dom';
+import MyAccount from './components/myAccount/myAccount';
 
 
 function App() {
     return (
         <div className="App">
             <Header />
-            <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/" element={<Home />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/*" element={<ErrorPage />} />
-            </Routes>
+            <div className='AppViewPort'>
+                <Routes>
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/" element={<Home />} />
+                    <Route path="/home" element={<Home />} />
+                    <Route path='/myAccount' element={<MyAccount />} />
+                    <Route path="/*" element={<ErrorPage />} />
+                </Routes>
+            </div>
             <Footer />
             <ToastContainer
                 position="bottom-left"
