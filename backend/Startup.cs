@@ -13,7 +13,7 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddSingleton(new MongoDBContext());
-        services.AddSingleton<UserService>();
+        services.AddSingleton<Services.UserService>();
         services.AddControllers();
         services.ConfigureApplicationCookie(options =>
         {
