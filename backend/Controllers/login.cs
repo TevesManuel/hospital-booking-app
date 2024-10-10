@@ -35,8 +35,9 @@ namespace Controllers
             {
                 if(data.email == "admin" && data.password == adminPassword)
                 {
+                    string? token = JWT.Instance.GenerateAdminToken();
                     return StatusCode(200, new {
-                        names = "Admin"
+                        token
                     });
                 }
             }
@@ -44,7 +45,7 @@ namespace Controllers
             Console.WriteLine($"Login return {user != null}");
             if(user != null)
             {
-                string? token = _userService.GenerateJwtToken(user);
+                string? token = JWT.Instance.GenerateUserToken(user);
                 if(token != null)
                 {
                     return StatusCode(200,  new { token });

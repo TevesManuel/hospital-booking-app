@@ -41,16 +41,36 @@ const Login : React.FC = () => {
                     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
                     const jsonPayload = decodeURIComponent(escape(atob(base64)));
                     let parsedData = JSON.parse(jsonPayload);
-                    toast.update(toastId, { render: `Hi ${parsedData.names.split(" ")[0]}`, type: "success", isLoading: false, autoClose: 3000  });
-                    userDispatch(
-                        {
-                            type: 'LOGIN',
-                            payload: {
-                                ...parsedData,
-                                token: data.token
-                            }            
-                        }
-                    )
+                    if(parsedData.type == 'patient')
+                    {
+                        toast.update(toastId, { render: `Hi ${parsedData.names.split(" ")[0]}`, type: "success", isLoading: false, autoClose: 3000  });
+                        userDispatch(
+                            {
+                                type: 'LOGIN',
+                                payload: {
+                                    ...parsedData,
+                                    token: data.token
+                                }            
+                            }
+                        )
+                    }
+                    else if(parsedData.type == 'patient')
+                    {
+
+                    }
+                    else if(parsedData.type == 'admin')
+                    {
+                        toast.update(toastId, { render: 'Hi admin', type: "success", isLoading: false, autoClose: 3000  });
+                        userDispatch(
+                            {
+                                type: 'LOGIN',
+                                payload: {
+                                    ...parsedData,
+                                    token: data.token
+                                }            
+                            }
+                        )
+                    }
                     navigate("/home");
                 })
             }
