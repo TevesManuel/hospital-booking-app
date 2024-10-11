@@ -6,13 +6,14 @@ import Footer from './components/footer/footer';
 import ErrorPage from './components/errorPage/errorPage';
 import Login from './components/login/login';
 import Register from './components/register/register';
+import MyAccount from './components/myAccount/myAccount';
+import DataPanel from './components/dataPanel/dataPanel';
+
 import 'react-toastify/dist/ReactToastify.css';
 import { Bounce, ToastContainer } from 'react-toastify';
 import {
     Routes, Route,
 } from 'react-router-dom';
-import MyAccount from './components/myAccount/myAccount';
-
 
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/home" element={<Home />} />
                     <Route path='/myAccount' element={<MyAccount />} />
+                    <Route path='/dataPanel*' element={<DataPanel />} />
                     <Route path="/*" element={<ErrorPage />} />
                 </Routes>
             </div>

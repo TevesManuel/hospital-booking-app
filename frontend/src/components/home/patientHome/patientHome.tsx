@@ -14,9 +14,9 @@ const PatientHome : React.FC = () => {
     return (
         <div className="patientHomeMainContainer">
             <Background />
-            <ControlCard label="Book" svgIcon={<EventIcon />}/>
-            <ControlCard label="View bookings" svgIcon={<EventNoteIcon />}/>
-            <ControlCard label="Medical records" svgIcon={<MedicalInformationIcon />}/>
+            <ControlCard onClick={(e)=>{}} label="Book" svgIcon={<EventIcon />}/>
+            <ControlCard onClick={(e)=>{}} label="View bookings" svgIcon={<EventNoteIcon />}/>
+            <ControlCard onClick={(e)=>{}} label="Medical records" svgIcon={<MedicalInformationIcon />}/>
         </div>
     );
 };

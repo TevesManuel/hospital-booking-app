@@ -51,11 +51,11 @@ public class JWT
 
     }
 
-    public string? GenerateAdminToken()
+    public string? GenerateManagerToken()
     {
         var claims = new[]
         {
-            new Claim("type", "admin")
+            new Claim("type", "manager")
         };
         if(_secretKey != null)
         {

@@ -30,12 +30,12 @@ namespace Controllers
             {
                 return BadRequest( new { message = "password is void." });
             }
-            string? adminPassword = Environment.GetEnvironmentVariable("ADMIN_PASSWORD");
-            if(adminPassword != null)
+            string? managerPassword = Environment.GetEnvironmentVariable("MANAGER_PASSWORD");
+            if(managerPassword != null)
             {
-                if(data.email == "admin" && data.password == adminPassword)
+                if(data.email == "manager" && data.password == managerPassword)
                 {
-                    string? token = JWT.Instance.GenerateAdminToken();
+                    string? token = JWT.Instance.GenerateManagerToken();
                     return StatusCode(200, new {
                         token
                     });

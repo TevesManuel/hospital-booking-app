@@ -58,9 +58,9 @@ const Login : React.FC = () => {
                     {
 
                     }
-                    else if(parsedData.type == 'admin')
+                    else if(parsedData.type == 'manager')
                     {
-                        toast.update(toastId, { render: 'Hi admin', type: "success", isLoading: false, autoClose: 3000  });
+                        toast.update(toastId, { render: 'Hi manager', type: "success", isLoading: false, autoClose: 3000  });
                         userDispatch(
                             {
                                 type: 'LOGIN',
