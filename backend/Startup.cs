@@ -20,20 +20,22 @@ public class Startup
             options.Cookie.SameSite = SameSiteMode.Strict;
             options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
         });
+        string JWTsecretKey = Environment.GetEnvironmentVariable("JWT_SECRET_KEY") 
+                     ?? throw new InvalidOperationException("\"JWT_SECRET_KEY\" is not seteed in the enviorement vars.");
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        .AddJwtBearer(options =>
-        {
-            options.TokenValidationParameters = new TokenValidationParameters
+            .AddJwtBearer(options =>
             {
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
-                ValidIssuer = "tu_dominio_o_nombre_de_emisor",
-                ValidAudience = "tu_dominio_o_nombre_de_audiencia",
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("tu_clave_secreta"))
-            };
-        });
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = "teves-hospital-booking-app",
+                    ValidAudience = "teves-hospital-booking-app",
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JWTsecretKey))
+                };
+            });
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
