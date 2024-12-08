@@ -20,7 +20,7 @@ const Register : React.FC = () => {
     const names     = useField();
     const lastNames = useField();
     const dni       = useField();
-    const telephone = useField();
+    const phoneNumber = useField();
     const locality  = useField();
     const zipCode   = useField();
     const address   = useField();
@@ -44,7 +44,7 @@ const Register : React.FC = () => {
                 names: names.value,
                 lastNames: lastNames.value,
                 dni: dni.value,
-                telephone: telephone.value,
+                phoneNumber: phoneNumber.value,
                 locality: locality.value,
                 zipCode: zipCode.value,
                 address: address.value,
@@ -123,7 +123,7 @@ const Register : React.FC = () => {
                                 </div>
                                 <div style={{flex: 5}}>
                                     <div className="form-group registerFormInput">
-                                        <TInput inputValues={telephone} placeholder="(xxx) xxx xxxx" label="Telephone" type="telephone"/>
+                                        <TInput inputValues={phoneNumber} placeholder="(xxx) xxx xxxx" label="Telephone" type="telephone"/>
                                     </div>
                                 </div>
                             </div>
