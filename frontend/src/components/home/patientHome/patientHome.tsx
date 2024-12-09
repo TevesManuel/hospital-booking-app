@@ -11,12 +11,14 @@ import Background from "../../background/background";
 import ControlCard from "../../basics/controlCard/controlCard";
 
 const PatientHome : React.FC = () => {
+    const styleForSvg = {'fontSize': '8vw'};
+
     return (
         <div className="patientHomeMainContainer">
             <Background />
-            <ControlCard onClick={(e)=>{}} label="Book" svgIcon={<EventIcon />}/>
-            <ControlCard onClick={(e)=>{}} label="View bookings" svgIcon={<EventNoteIcon />}/>
-            <ControlCard onClick={(e)=>{}} label="Medical records" svgIcon={<MedicalInformationIcon />}/>
+            <ControlCard onClick={(e)=>{}} label="Book" svgIcon={<EventIcon style={styleForSvg} />}/>
+            <ControlCard onClick={(e)=>{}} label="View bookings" svgIcon={<EventNoteIcon style={styleForSvg} />}/>
+            <ControlCard onClick={(e)=>{}} label="Medical records" svgIcon={<MedicalInformationIcon style={styleForSvg} />}/>
         </div>
     );
 };
