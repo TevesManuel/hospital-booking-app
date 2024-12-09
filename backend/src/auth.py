@@ -47,23 +47,7 @@ def register():
         "dateBirth": data["dateBirth"],
     })
 
-    token = jwt.encode(
-        {
-            "email": data["email"],
-            "names": data['names'],
-            "lastNames": data['lastNames'],
-            "dateBirth": data['dateBirth'],
-            "type": "patient"
-        },
-        os.getenv("JWT_SECRET_KEY"),
-        algorithm="HS256"
-    )
-    
-    return jsonify({
-        "names": data["names"],
-        "lastNames": data["lastNames"],
-        "token": token
-    }), 201
+    return jsonify({}), 201
 
 @auth_bp.route('/api/login', methods=['POST'])
 def login():

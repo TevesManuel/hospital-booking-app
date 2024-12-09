@@ -56,7 +56,7 @@ const Register : React.FC = () => {
             {
                 response.json().then(data => {
                     navigate("/login");
-                    toast.update(toastId, { render: `Hi ${data.names.split(" ")[0]}`, type: "success", isLoading: false, autoClose: 3000  });
+                    toast.update(toastId, { render: `You're already registered.Try logging in now`, type: "success", isLoading: false, autoClose: 3000  });
                 })
             }
             else
