@@ -41,7 +41,7 @@ const Login : React.FC = () => {
                     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
                     const jsonPayload = decodeURIComponent(escape(atob(base64)));
                     let parsedData = JSON.parse(jsonPayload);
-                    if(parsedData.type == 'patient')
+                    if(parsedData.type === 'patient')
                     {
                         toast.update(toastId, { render: `Hi ${parsedData.names.split(" ")[0]}`, type: "success", isLoading: false, autoClose: 3000  });
                         userDispatch(
@@ -54,11 +54,11 @@ const Login : React.FC = () => {
                             }
                         )
                     }
-                    else if(parsedData.type == 'patient')
+                    else if(parsedData.type === 'patient')
                     {
 
                     }
-                    else if(parsedData.type == 'manager')
+                    else if(parsedData.type === 'manager')
                     {
                         toast.update(toastId, { render: 'Hi manager', type: "success", isLoading: false, autoClose: 3000  });
                         userDispatch(

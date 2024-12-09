@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useUserValue } from "../../context/user";
 import ErrorPage from "../errorPage/errorPage";
 import { useLocation } from "react-router-dom";
@@ -26,9 +26,9 @@ const DataPanel : React.FC = () => {
 
     if(userValue != null)
     {
-        if(location.pathname.split("/")[2] == 'patients')
+        if(location.pathname.split("/")[2] === 'patients')
         {
-            if(userValue.type == 'manager')
+            if(userValue.type === 'manager')
             {
                 return ( 
                     <TableContainer component={Paper}>
@@ -63,16 +63,16 @@ const DataPanel : React.FC = () => {
                 );
             }
         }
-        if(location.pathname.split("/")[2] == 'medics')
+        if(location.pathname.split("/")[2] === 'medics')
         {
-            if(userValue.type == 'manager')
+            if(userValue.type === 'manager')
             {
                 return ( <ComingSoonPage /> );
             }
         }
-        if(location.pathname.split("/")[2] == 'admins')
+        if(location.pathname.split("/")[2] === 'admins')
         {
-            if(userValue.type == 'manager')
+            if(userValue.type === 'manager')
             {
                 return ( <ComingSoonPage /> );
             }
